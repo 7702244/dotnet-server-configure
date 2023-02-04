@@ -94,6 +94,8 @@ sudo add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubunt
 sudo apt update
 sudo apt install -y mssql-server
 sudo /opt/mssql/bin/mssql-conf setup
+sudo /opt/mssql/bin/mssql-conf set sqlagent.enabled true
+sudo systemctl restart mssql-server
 systemctl status mssql-server --no-pager
 
 # Setting Up a Basic Firewall
