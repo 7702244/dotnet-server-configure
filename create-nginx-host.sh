@@ -68,6 +68,9 @@ sudo ln -s $HOSTDIRECTORY/nginx/$HOSTNAME.config /etc/nginx/sites-available/
 sudo ln -s $HOSTDIRECTORY/nginx/$HOSTNAME.config /etc/nginx/sites-enabled/
 sudo ln -s $HOSTDIRECTORY/nginx/$HOSTNAME.service /etc/systemd/system/
 
+# Enable service
+sudo systemctl enable $HOSTNAME.service
+
 # Finish
 echo -e "${green:-}FINISH${normal:-}"
 echo -e "${cyan:-}1. Modify config files in $HOSTDIRECTORY/nginx/ directory${normal:-}"
