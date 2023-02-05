@@ -4,18 +4,21 @@
 ## Configure server environment
 
 1. Upload setup script
+
 Upload setup script to the server by command:
 ```
 $ wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/ubuntu-configure.sh
 ```
 
 2. Run script and follow instructions
+
 ```
 $ bash ubuntu-configure.sh
 ```
-It will install `Nginx`, `Webmin`, `Certbot`, `.NET`, `SQL Server`.
+It will install `Nginx`, `Webmin`, `Certbot`, `.NET`, `SQL Server` and configure firewall.
 
 3. Configure Nginx
+
 To avoid a possible hash bucket memory problem that can arise from adding additional server names, it is necessary to adjust a single value in the `/etc/nginx/nginx.conf` file. Open the file and modify:
 ```
 ...
@@ -30,28 +33,34 @@ http {
 ## Check server environment
 
 1. Check Nginx
+
 Open the server IP in your browser and make sure that the standard Nginx page appears.
 
 2. Check Webmin
+
 Open the server IP with port `10000` in your browser and make sure that you can login in Webmin.
 
 3. Check SQL Server connection
+
 Check the remote connection to the SQL server with `sa` login.
 
 ## Setup SSH keys
 
-1. Creating the Key Pair (if not created)
+1. Creating the Key Pair (if not created) on local machine.
+
 ```
 $ ssh-keygen
 ```
 
 2. Copying the Public Key to Your Ubuntu Server
+
 ```
 $ ssh-copy-id username@remote_host
 ```
 Repeat this step for each user.
 
 3. Disabling Password Authentication on Your Server
+
 Inside the file `/etc/ssh/sshd_config`, search for a directive called `PasswordAuthentication`. This line may be commented out with a `#` at the beginning of the line. Uncomment the line by removing the `#`, and set the value to `no`. This will disable your ability to log in via SSH using account passwords:
 ```
 . . .
@@ -68,22 +77,26 @@ As a precaution, open up a new terminal window and test that the SSH service is 
 ## Setup Website
 
 1. Upload setup script
+
 Upload setup script to the server by command:
 ```
 $ wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/create-nginx-host.sh
 ```
 
 2. Run script and follow instructions
+
 ```
 $ bash create-nginx-host.sh
 ```
 
 3. Obtaining an SSL Certificate by Certbot
+
 ```
 $ sudo certbot --nginx -d example.com -d www.example.com
 ```
 
 4. Verifying Certbot Auto-Renewal
+
 ```
 $ sudo systemctl status certbot.timer
 ```
@@ -93,6 +106,7 @@ $ sudo certbot renew --dry-run
 ```
 
 5. Check Website
+
 Check Nginx config:
 ```
 $ sudo sudo nginx -t
