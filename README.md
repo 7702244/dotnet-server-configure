@@ -6,7 +6,7 @@
 1. Upload setup script
 Upload setup script to the server by command:
 ```
-$ https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/ubuntu-configure.sh
+$ wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/ubuntu-configure.sh
 ```
 
 2. Run script and follow instructions
@@ -70,7 +70,7 @@ As a precaution, open up a new terminal window and test that the SSH service is 
 1. Upload setup script
 Upload setup script to the server by command:
 ```
-$ https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/create-nginx-host.sh
+$ wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/create-nginx-host.sh
 ```
 
 2. Run script and follow instructions
