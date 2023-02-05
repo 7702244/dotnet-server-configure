@@ -30,6 +30,15 @@ http {
 ...
 ```
 
+When no `server_name` matches, Nginx uses the default server. If no default server is defined, the first server in the configuration file is the default server. As a best practice, add a specific default server that returns a status code of 444 in your `/etc/nginx/sites-available/default` configuration file. A default server configuration example is:
+```
+server {
+    listen   80 default_server;
+    # listen [::]:80 default_server deferred;
+    return   444;
+}
+```
+
 ## Check server environment
 
 1. Check Nginx

@@ -59,12 +59,8 @@ sudo chmod -R 755 $HOSTDIRECTORY
 
 # Download Nginx configs
 echo -e "${cyan:-}Downloading Nginx configs${normal:-}"
-wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/template.config -P $HOSTDIRECTORY/nginx/
-wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/template.service -P $HOSTDIRECTORY/nginx/
-
-# Copy files
-cp template.config $HOSTDIRECTORY/nginx/$HOSTNAME.config
-cp template.service $HOSTDIRECTORY/nginx/$HOSTNAME.service
+wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/template.config -O $HOSTDIRECTORY/nginx/$HOSTNAME.config
+wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/template.service -O $HOSTDIRECTORY/nginx/$HOSTNAME.service
 
 # Link config and service
 echo -e "${cyan:-}Linking Nginx files${normal:-}"
