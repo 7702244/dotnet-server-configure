@@ -124,3 +124,35 @@ $ sudo systemctl restart example.com.service
 ### System services
 
 - `/etc/systemd/system/`: Background services that run with the system.
+
+## Managing Website Process
+
+To stop your website, type:
+```
+$ sudo systemctl stop example.com.service
+```
+
+To start the website when it is stopped, type:
+```
+$ sudo systemctl start example.com.service
+```
+
+To stop and then start the service again, type:
+```
+$ sudo systemctl restart example.com.service
+```
+
+To disable the service, type:
+```
+$ sudo systemctl disable example.com.service
+```
+
+To enable the service, type:
+```
+$ sudo systemctl enable example.com.service
+```
+
+To view logs, type:
+```
+$ sudo journalctl -fu example.com.service
+```
