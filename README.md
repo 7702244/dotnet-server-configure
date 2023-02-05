@@ -124,6 +124,10 @@ Restart Nginx service:
 ```
 $ sudo systemctl restart nginx
 ```
+Enable Website service:
+```
+$ sudo systemctl enable example.com.service
+```
 Restart Website service:
 ```
 $ sudo systemctl restart example.com.service
