@@ -4,7 +4,10 @@
 ## Configure server environment
 
 1. Upload setup script
-Upload setup script to the server by ssh. You can use Cyberduck utility for simplicity.
+Upload setup script to the server by command:
+```
+$ https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/ubuntu-configure.sh
+```
 
 2. Run script and follow instructions
 ```
