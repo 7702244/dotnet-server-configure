@@ -79,3 +79,17 @@ To test the renewal process, you can do a dry run with certbot:
 ```
 $ sudo certbot renew --dry-run
 ```
+
+5. Check Website
+Check Nginx config:
+```
+$ sudo sudo nginx -t
+```
+Restart Nginx service:
+```
+$ sudo systemctl restart nginx
+```
+Restart Website service:
+```
+$ sudo systemctl restart example.com.service
+```
