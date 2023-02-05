@@ -69,4 +69,7 @@ sudo ln -s $HOSTDIRECTORY/nginx/$HOSTNAME.config /etc/nginx/sites-enabled/
 sudo ln -s $HOSTDIRECTORY/nginx/$HOSTNAME.service /etc/systemd/system/
 
 # Finish
-echo -e "${cyan:-}Modify files in $HOSTDIRECTORY/nginx/ directory${normal:-}"
+echo -e "${green:-}FINISH${normal:-}"
+echo -e "${cyan:-}1. Modify config files in $HOSTDIRECTORY/nginx/ directory${normal:-}"
+echo -e "${cyan:-}2. Upload website to $HOSTDIRECTORY/www/ directory${normal:-}"
+echo -e "${cyan:-}3. Set permissions to $HOSTDIRECTORY/www/ directory${normal:-}"
