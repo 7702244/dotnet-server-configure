@@ -68,6 +68,11 @@ sudo ln -s $HOSTDIRECTORY/nginx/$HOSTNAME.config /etc/nginx/sites-available/
 sudo ln -s $HOSTDIRECTORY/nginx/$HOSTNAME.config /etc/nginx/sites-enabled/
 sudo ln -s $HOSTDIRECTORY/nginx/$HOSTNAME.service /etc/systemd/system/
 
+# Generate SSL
+echo -e "${cyan:-}Creating SSL${normal:-}"
+sudo openssl req -x509 -subj "/CN=*.$HOSTNAME" -nodes -days 3650 -newkey rsa:2048 -keyout /etc/ssl/private/$HOSTNAME.key -out /etc/ssl/certs/$HOSTNAME.crt
+echo -e "${green:-}Created SSL:\n /etc/ssl/private/$HOSTNAME.key \n /etc/ssl/certs/$HOSTNAME.crt${normal:-}"
+
 # Enable service
 sudo systemctl enable $HOSTNAME.service
 
