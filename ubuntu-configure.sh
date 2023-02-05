@@ -69,11 +69,6 @@ rm setup-repos.sh
 sudo apt install -y webmin
 sudo systemctl status webmin
 
-# Install Certbot
-# https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04
-echo -e "${cyan:-}Installing Certbot${normal:-}"
-sudo apt install -y certbot python3-certbot-nginx
-
 # Install .NET
 # https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
 echo -e "${cyan:-}Installing .NET${normal:-}"
