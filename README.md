@@ -133,6 +133,11 @@ Restart Website service:
 $ sudo systemctl restart example.com.service
 ```
 
+6. Configure `/etc/hosts` file:
+```
+127.0.0.1 example.com
+```
+
 ## Important Files and Directories
 
 ### Server Configuration
