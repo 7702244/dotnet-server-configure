@@ -15,6 +15,18 @@ $ bash ubuntu-configure.sh
 ```
 It will install `Nginx`, `Webmin`, `Certbot`, `.NET`, `SQL Server`.
 
+3. Configure Nginx
+To avoid a possible hash bucket memory problem that can arise from adding additional server names, it is necessary to adjust a single value in the `/etc/nginx/nginx.conf` file. Open the file and modify:
+```
+...
+http {
+    ...
+    server_names_hash_bucket_size 64;
+    ...
+}
+...
+```
+
 ## Check server environment
 
 1. Check Nginx
