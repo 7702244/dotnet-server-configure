@@ -15,7 +15,7 @@ $ wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/ub
 ```
 $ bash ubuntu-configure.sh
 ```
-It will install `Nginx`, `Webmin`, `Certbot`, `.NET`, `SQL Server` and configure firewall.
+It will install `Nginx`, `Webmin`, `.NET`, `SQL Server` and configure firewall.
 
 3. Configure Nginx
 
@@ -97,24 +97,11 @@ $ wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/cr
 ```
 $ bash create-nginx-host.sh
 ```
+It will create host directory, upload and link nginx config and service for host and generate Self-Figned SSL for host.
 
-3. Obtaining an SSL Certificate by Certbot
+3. Upload website files
 
-```
-$ sudo certbot --nginx -d example.com -d www.example.com
-```
-
-4. Verifying Certbot Auto-Renewal
-
-```
-$ sudo systemctl status certbot.timer
-```
-To test the renewal process, you can do a dry run with certbot:
-```
-$ sudo certbot renew --dry-run
-```
-
-5. Check Website
+4. Check Website
 
 Check Nginx config:
 ```
@@ -133,7 +120,7 @@ Restart Website service:
 $ sudo systemctl restart example.com.service
 ```
 
-6. Configure `/etc/hosts` file:
+5. Configure `/etc/hosts` file:
 ```
 127.0.0.1 example.com
 ```
