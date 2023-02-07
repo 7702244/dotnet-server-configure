@@ -193,3 +193,52 @@ To view logs, type:
 ```
 $ sudo journalctl -fu example.com.service
 ```
+
+## Run Scheduled Tasks
+
+Timers cannot run commands, so oneshot services are used to run commands:
+```
+[Unit]
+Description=One shot service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/systemctl restart my-service.service
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Timer code:
+```
+[Unit]
+Description=Run oneshot service periodically
+
+[Timer]
+Unit=oneshot.service
+OnCalendar=Mon..Fri 10:30
+
+[Install]
+WantedBy=timers.target
+```
+
+Enable and starts timer:
+```
+$ sudo systemctl enable --now my-service.timer
+```
+
+List only enabled timers:
+```
+$ sudo systemctl list-timers
+```
+
+List all timers:
+```
+$ sudo systemctl list-timers --all
+```
+
+Analyze calendar for timer:
+```
+$ systemd-analyze calendar --iterations=2 "Sat,Tue 2022-11,12-* 23:55:00"
+$ systemd-analyze calendar --iterations=2 "Mon..Fri 10:30"
+```
