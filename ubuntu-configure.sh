@@ -104,6 +104,10 @@ sudo systemctl restart mssql-server
 systemctl status mssql-server --no-pager
 
 # Setting Up a Basic Firewall
+if ! type ufw > /dev/null; then
+    echo -e "${cyan:-}Installing Firewall${normal:-}"
+    sudo apt install -y ufw
+fi
 echo -e "${cyan:-}Setting Up Firewall${normal:-}"
 sudo ufw app list
 sudo ufw allow OpenSSH
