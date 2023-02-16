@@ -46,7 +46,7 @@ confirm
 HOSTDIRECTORY=/var/www/$HOSTNAME
 HOSTUSER=www-data
 
-# Create user
+# Create host folder
 echo -e "${cyan:-}Creating folder ${bold:-}$HOSTDIRECTORY${normal:-}"
 sudo mkdir -p $HOSTDIRECTORY/www
 sudo mkdir -p $HOSTDIRECTORY/nginx
