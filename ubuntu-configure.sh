@@ -57,7 +57,7 @@ sudo usermod -aG sudo $USERNAME
 # Install Nginx
 echo -e "${cyan:-}Installing Nginx${normal:-}"
 sudo apt update
-sudo apt install nginx
+sudo apt install -y nginx
 sudo systemctl status nginx
 
 # Install Webmin
