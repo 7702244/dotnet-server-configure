@@ -64,8 +64,15 @@ $ ssh-keygen
 2. Copying the Public Key to Your Ubuntu Server
 
 ```
-$ ssh-copy-id username@remote_host
+$ ssh-copy-id user@host
 ```
+
+or
+
+```
+$ ssh-copy-id -i ~/.ssh/mykey user@host
+```
+
 Repeat this step for each user.
 
 3. Disabling Password Authentication on Your Server
@@ -174,6 +181,11 @@ $ sudo systemctl disable example.com.service
 To enable the service, type:
 ```
 $ sudo systemctl enable example.com.service
+```
+
+To view service status:
+```
+$ sudo systemctl status example.com.service
 ```
 
 To view logs, type:
