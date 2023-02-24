@@ -193,6 +193,11 @@ To view logs, type:
 $ sudo journalctl -fu example.com.service
 ```
 
+To view all running services:
+```
+$ sudo systemctl --type=service --state=running
+```
+
 ## Run Scheduled Tasks
 
 Timers cannot run commands, so oneshot services are used to run commands:
