@@ -39,6 +39,8 @@ server {
 }
 ```
 
+Go to `/etc/logrotate.d/nginx` and replace content with file `logrotate.nginx`.
+
 ## Check server environment
 
 1. Check Nginx
