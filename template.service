@@ -2,14 +2,30 @@
 Description=example.com Kestrel Service  
 
 [Service]
+# application will notify systemd when it's ready and when it's stopping
+Type=notify
+
 WorkingDirectory=/var/www/example.com/www
+
+# systemd will run this executable to start the service
+# if /usr/bin/dotnet doesn't work, use `which dotnet` to find correct dotnet executable path
 ExecStart=/usr/bin/dotnet /var/www/example.com/www/WebApplication.dll
+
+# ensure the service restarts after crashing
 Restart=always
-# Restart service after 10 seconds if the dotnet service crashes:
+
+# amount of time to wait before restarting the service  
 RestartSec=10
 KillSignal=SIGINT
+
+# to query logs using journalctl, set a logical name here
 SyslogIdentifier=dotnet-example-com
+
+
+# Use your username to keep things simple.
+# If you pick a different user, make sure dotnet and all permissions are set correctly to run the app
 User=www-data
+
 Environment=ASPNETCORE_ENVIRONMENT=Production
 Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
 Environment=ASPNETCORE_URLS=http://localhost:5000
