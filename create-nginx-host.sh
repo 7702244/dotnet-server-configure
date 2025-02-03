@@ -79,5 +79,9 @@ sudo systemctl enable $HOSTNAME.service
 # Finish
 echo -e "${green:-}FINISH${normal:-}"
 echo -e "${cyan:-}1. Modify config files in $HOSTDIRECTORY/nginx/ directory${normal:-}"
+
+echo -e "${cyan:-}Used NGINX ports:${normal:-}"
+nginx -T | grep proxy_pass
+
 echo -e "${cyan:-}2. Upload website to $HOSTDIRECTORY/www/ directory${normal:-}"
 echo -e "${cyan:-}3. Set permissions to $HOSTDIRECTORY/www/ directory${normal:-}"
