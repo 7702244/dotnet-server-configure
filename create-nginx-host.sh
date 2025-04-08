@@ -37,14 +37,24 @@ function confirm {
 # START WORK
 # ==============================
 
-# Enter diretory name for virtual host
-read -p "Enter diretory name for virtual host : " HOSTNAME
-echo -e "Virtual host ${bold:-}${cyan:-}$HOSTNAME${normal:-} will be created."
+# Enter name for virtual host
+read -p "Enter name for virtual host : " HOSTNAME
+
+# Enter port for virtual host
+echo -e "${cyan:-}Used NGINX ports:${normal:-}"
+nginx -T | grep proxy_pass
+read -p "Enter port for virtual host : " HOSTPORT
+echo -e "Virtual host ${bold:-}${cyan:-}$HOSTNAME${normal:-} with port ${bold:-}${red:-}$HOSTPORT${normal:-} will be created."
 
 confirm
 
 HOSTDIRECTORY=/var/www/$HOSTNAME
 HOSTUSER=www-data
+CONFIGPATH=$HOSTDIRECTORY/nginx/$HOSTNAME.config
+SERVICEPATH=$HOSTDIRECTORY/nginx/$HOSTNAME.service
+
+# Replace '.' with '-' for SyslogIdentifier
+LOGID=${HOSTNAME/\./-}
 
 # Create host folder
 echo -e "${cyan:-}Creating folder ${bold:-}$HOSTDIRECTORY${normal:-}"
@@ -59,14 +69,21 @@ sudo chmod -R 755 $HOSTDIRECTORY
 
 # Download Nginx configs
 echo -e "${cyan:-}Downloading Nginx configs${normal:-}"
-wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/template.config -O $HOSTDIRECTORY/nginx/$HOSTNAME.config
-wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/template.service -O $HOSTDIRECTORY/nginx/$HOSTNAME.service
+wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/template.config -O $CONFIGPATH
+wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/template.service -O $SERVICEPATH
+
+# Replace variables in configs
+sed -i '' "s/example\.com/$HOSTNAME/g" $CONFIGPATH
+sed -i '' "s/5000/$HOSTPORT/g" $CONFIGPATH
+sed -i '' "s/example\.com/$HOSTNAME/g" $SERVICEPATH
+sed -i '' "s/5000/$HOSTPORT/g" $SERVICEPATH
+sed -i '' "s/example\-com/$LOGID/g" $SERVICEPATH
 
 # Link config and service
 echo -e "${cyan:-}Linking Nginx files${normal:-}"
-sudo ln -s $HOSTDIRECTORY/nginx/$HOSTNAME.config /etc/nginx/sites-available/
-sudo ln -s $HOSTDIRECTORY/nginx/$HOSTNAME.config /etc/nginx/sites-enabled/
-sudo ln -s $HOSTDIRECTORY/nginx/$HOSTNAME.service /etc/systemd/system/
+sudo ln -s $CONFIGPATH /etc/nginx/sites-available/
+sudo ln -s $CONFIGPATH /etc/nginx/sites-enabled/
+sudo ln -s $SERVICEPATH /etc/systemd/system/
 
 # Generate SSL
 echo -e "${cyan:-}Creating SSL${normal:-}"
@@ -78,10 +95,6 @@ sudo systemctl enable $HOSTNAME.service
 
 # Finish
 echo -e "${green:-}FINISH${normal:-}"
-echo -e "${cyan:-}1. Modify config files in $HOSTDIRECTORY/nginx/ directory${normal:-}"
-
-echo -e "${cyan:-}Used NGINX ports:${normal:-}"
-nginx -T | grep proxy_pass
-
+echo -e "${cyan:-}1. Check config files in $HOSTDIRECTORY/nginx/ directory${normal:-}"
 echo -e "${cyan:-}2. Upload website to $HOSTDIRECTORY/www/ directory${normal:-}"
 echo -e "${cyan:-}3. Set permissions to $HOSTDIRECTORY/www/ directory${normal:-}"
