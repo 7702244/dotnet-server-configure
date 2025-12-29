@@ -69,15 +69,15 @@ sudo chmod -R 755 $HOSTDIRECTORY
 
 # Download Nginx configs
 echo -e "${cyan:-}Downloading Nginx configs${normal:-}"
-wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/template.config -O $CONFIGPATH
-wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/template.service -O $SERVICEPATH
+wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/template.config -O $CONFIGPATH && echo -e "${green:-}Downloaded: ${bold:-}$CONFIGPATH${normal:-}" || echo -e "${red:-}Error downloading: ${bold:-}$CONFIGPATH${normal:-}"
+wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/template.service -O $SERVICEPATH && echo -e "${green:-}Downloaded: ${bold:-}$SERVICEPATH${normal:-}" || echo -e "${red:-}Error downloading: ${bold:-}$SERVICEPATH${normal:-}"
 
 # Replace variables in configs
-sed -i '' "s/example\.com/$HOSTNAME/g" $CONFIGPATH
-sed -i '' "s/5000/$HOSTPORT/g" $CONFIGPATH
-sed -i '' "s/example\.com/$HOSTNAME/g" $SERVICEPATH
-sed -i '' "s/5000/$HOSTPORT/g" $SERVICEPATH
-sed -i '' "s/example\-com/$LOGID/g" $SERVICEPATH
+sed -i "s/example\.com/$HOSTNAME/g" $CONFIGPATH
+sed -i "s/5000/$HOSTPORT/g" $CONFIGPATH
+sed -i "s/example\.com/$HOSTNAME/g" $SERVICEPATH
+sed -i "s/5000/$HOSTPORT/g" $SERVICEPATH
+sed -i "s/example\-com/$LOGID/g" $SERVICEPATH
 
 # Link config and service
 echo -e "${cyan:-}Linking Nginx files${normal:-}"
