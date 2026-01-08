@@ -77,11 +77,9 @@ sudo openssl dhparam -dsaparam -out /etc/nginx/dhparam.pem 2048
 # Install .NET
 # https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
 echo -e "${cyan:-}Installing .NET${normal:-}"
-wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-rm packages-microsoft-prod.deb
-sudo apt update
-sudo apt install -y aspnetcore-runtime-7.0
+sudo add-apt-repository ppa:dotnet/backports
+sudo apt-get update
+sudo apt-get install -y aspnetcore-runtime-10.0
 dotnet --info
 
 # ARM Install
