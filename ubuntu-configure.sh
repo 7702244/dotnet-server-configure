@@ -82,20 +82,13 @@ sudo apt-get update
 sudo apt-get install -y aspnetcore-runtime-10.0
 dotnet --info
 
-# ARM Install
-#wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
-#sudo bash dotnet-install.sh --channel 7.0 --version latest --runtime aspnetcore
-#rm dotnet-install.sh
-#export DOTNET_ROOT=$HOME/.dotnet
-#export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
-
 # Install SQL Server
-# https://learn.microsoft.com/en-us/sql/linux/quickstart-install-connect-ubuntu?view=sql-server-ver16
+# https://learn.microsoft.com/en-us/sql/linux/quickstart-install-connect-ubuntu?view=sql-server-linux-ver16&tabs=ubuntu2204%2C2025ubuntu2204%2Codbc-ubuntu-2204
 echo -e "${cyan:-}Installing SQL Server${normal:-}"
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-sudo add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/20.04/mssql-server-2019.list)"
-sudo apt update
-sudo apt install -y mssql-server
+curl https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
+curl -fsSL https://packages.microsoft.com/config/ubuntu/22.04/mssql-server-2022.list | sudo tee /etc/apt/sources.list.d/mssql-server-2022.list
+sudo apt-get update
+sudo apt-get install -y mssql-server
 sudo /opt/mssql/bin/mssql-conf setup
 sudo /opt/mssql/bin/mssql-conf set sqlagent.enabled true
 sudo systemctl restart mssql-server
