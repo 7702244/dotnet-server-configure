@@ -42,7 +42,7 @@ read -p "Enter name for virtual host : " HOSTNAME
 
 # Enter port for virtual host
 echo -e "${cyan:-}Used NGINX ports:${normal:-}"
-nginx -T | grep proxy_pass
+nginx -T | grep proxy_pass || true
 read -p "Enter port for virtual host : " HOSTPORT
 echo -e "Virtual host ${bold:-}${cyan:-}$HOSTNAME${normal:-} with port ${bold:-}${red:-}$HOSTPORT${normal:-} will be created."
 
