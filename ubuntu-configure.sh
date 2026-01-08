@@ -63,10 +63,10 @@ sudo systemctl status nginx
 # Install Webmin
 # https://webmin.com/download/
 echo -e "${cyan:-}Installing Webmin${normal:-}"
-wget https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh
-sudo sh setup-repos.sh
-rm setup-repos.sh
-sudo apt install -y webmin
+wget https://raw.githubusercontent.com/webmin/webmin/master/webmin-setup-repo.sh
+sudo sh webmin-setup-repo.sh
+rm webmin-setup-repo.sh
+sudo apt-get install webmin --install-recommends
 sudo systemctl status webmin
 
 # Create Diffie-Hellman (DH) group
