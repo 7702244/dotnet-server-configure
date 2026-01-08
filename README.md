@@ -104,7 +104,7 @@ $ wget https://raw.githubusercontent.com/7702244/dotnet-server-configure/main/cr
 2. Run script and follow instructions
 
 ```
-$ bash create-nginx-host.sh
+$ sudo bash create-nginx-host.sh
 ```
 It will create host directory, upload and link nginx config and service for host and generate Self-Figned SSL for host.
 
