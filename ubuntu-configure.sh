@@ -74,6 +74,14 @@ sudo systemctl status webmin
 echo -e "${cyan:-}Creating Diffie-Hellman (DH) group${normal:-}"
 sudo openssl dhparam -dsaparam -out /etc/nginx/dhparam.pem 2048
 
+# Dummy cert
+# https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-20-04-1
+echo -e "${cyan:-}Creating Dummy cert${normal:-}"
+sudo mkdir -p /etc/nginx/ssl
+sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
+  -keyout /etc/nginx/ssl/dummy.key \
+  -out /etc/nginx/ssl/dummy.crt
+
 # Install .NET
 # https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
 echo -e "${cyan:-}Installing .NET${normal:-}"
