@@ -35,6 +35,17 @@ When no `server_name` matches, Nginx uses the default server. If no default serv
 server {
     listen   80 default_server;
     # listen [::]:80 default_server deferred;
+
+	listen 443 ssl default_server;
+
+    # Turn off access logging
+    access_log off;
+
+    # SSL/TLS settings
+    # Минимальные заглушки SSL (обязательны, иначе nginx не запустится)
+    ssl_certificate     /etc/nginx/ssl/dummy.crt;
+    ssl_certificate_key /etc/nginx/ssl/dummy.key;
+
     return   444;
 }
 ```
